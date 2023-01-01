@@ -1,15 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ResolutionForm from "./components/ResolutionForm";
-import ResolutionList from "./components/resolution/ResolutionList";
 
+import './App.css';
+import ResolutionForm from "./components/form/ResolutionForm";
+import ResolutionList from "./components/resolution/ResolutionList";
+import FavList from './components/fav/FavList';
 function App() {
   return (
     <div className="App">
       this is app
       <ResolutionForm/>
         <ResolutionList/>
+        <FavList />
     </div>
   );
 }

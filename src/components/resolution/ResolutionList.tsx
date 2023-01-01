@@ -1,18 +1,19 @@
 import React from "react";
-import {useSelector} from "react-redux";
-import {RootState} from '../../redux/store'
+import{useSelector} from "react-redux";
+import { RootState } from "../../redux/store";
 import ResolutionItem from "./ResolutionItem";
-import { v4 as uuidv4 } from 'uuid';
 
 export default function ResolutionList(){
-    const list=useSelector((state:RootState)=>state.resolution.resolutionList)
-    const resolutionId= uuidv4()
-    return (
+    const list = useSelector(
+        (state:RootState)=> state.resolution.resolutionList
+    );
+
+    return(
         <div>
-          <h1>Resolution List</h1>
-            {list.map((item)=>{
-               return <ResolutionItem key={resolutionId} item={item} itemId={resolutionId}/>
-            })}
+            <h1>ResolutionList</h1>
+            {list.map((item)=>(
+                <ResolutionItem key={crypto.randomUUID()} item={item} />
+            ))}
         </div>
     )
 }

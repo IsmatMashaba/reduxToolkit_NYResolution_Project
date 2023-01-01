@@ -1,28 +1,30 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Resolution from "../../types/type";
 
 type InitialState = {
-   resolutionList: Resolution[]
-}
-const initialState:InitialState = {
-    resolutionList: []
-}
+    resolutionList: Resolution[];
+};
 
-const resolutionSlice= createSlice({
-    name: 'resolution',
+const initialState: InitialState = {
+    resolutionList:[],
+};
+
+const resolutionSlice = createSlice({
+    name:"resolution",
     initialState,
-    reducers: {
-        addResolution: (state,action:PayloadAction<Resolution>)=>{
-         //action.payload : {}
-            state.resolutionList.push(action.payload)
-
-            // action.payload= userInput
-            //userInput= Resolution
+    reducers:{
+        addResolution:(state, action:PayloadAction<Resolution>)=>{
+            state.resolutionList.push(action.payload);
+        },
+// delete resolution
+        removeResolution : (state, action)=>{
+            const result = state.resolutionList.filter((item)=>item.title !== action.payload.title);
+            state.resolutionList = result;
         }
-    }
-})
-//actions, reducer
+    },
+});
 
-export const actions = resolutionSlice.actions
- const reducer=resolutionSlice.reducer
-export default reducer
+export const resolutionActions = resolutionSlice.actions;
+const reducer = resolutionSlice.reducer;
+export default reducer;
+

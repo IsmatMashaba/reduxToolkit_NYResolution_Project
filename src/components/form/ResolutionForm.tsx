@@ -1,15 +1,14 @@
 import React, {useState} from "react";
-import Resolution from "../types/type";
-import {useDispatch} from "react-redux";
-import {actions} from "../redux/slice/resolution";
-
-import dayjs, { Dayjs } from 'dayjs';
 import TextField from '@mui/material/TextField';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import Button from '@mui/material/Button';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import {Button} from "@mui/material";
-import Snackbar from "@mui/material/Snackbar";
+import dayjs, {Dayjs} from "dayjs";
+import { useDispatch } from "react-redux";
+import Resolution from "../../types/type";
+import { resolutionActions } from "../../redux/slice/resolution";
+import Snackbar from '@mui/material/Snackbar';
 import Alert from "@mui/material/Alert";
 
 
@@ -39,9 +38,9 @@ setUserInput({...userInput,title: event.target.value})
  //dispatch the addResolution action
     const dispatch= useDispatch()
     function submitResolution(){
-         dispatch(actions.addResolution(userInput))
+         dispatch(resolutionActions.addResolution(userInput))
         handleClick();
-
+        setUserInput({...userInput, title:""});
     }
 //add button message
     const [open, setOpen] =useState(false);
@@ -62,6 +61,7 @@ setUserInput({...userInput,title: event.target.value})
                 label="Type a resolution"
                 variant="standard"
                 onChange={handleTitleValue}
+                value={userInput.title}
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
@@ -69,7 +69,8 @@ setUserInput({...userInput,title: event.target.value})
                 inputFormat="MM/DD/YYYY"
                 value={userInput.date}
                 onChange={handleDateValue}
-                renderInput={(params) => <TextField {...params} />}
+                /*renderInput={(params) => <TextField {...params} />}*/
+                renderInput={(inputProps) => ( <TextField {...inputProps} required/>)}
             />
             </LocalizationProvider>
             <Button variant="outlined" onClick={submitResolution}>Add</Button>
@@ -81,5 +82,6 @@ setUserInput({...userInput,title: event.target.value})
         </div>
     )
 }
+
 
 
