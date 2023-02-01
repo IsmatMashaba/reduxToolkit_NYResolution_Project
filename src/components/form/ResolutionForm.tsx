@@ -39,9 +39,11 @@ setUserInput({...userInput,title: event.target.value})
     const dispatch= useDispatch()
     function submitResolution(){
          dispatch(resolutionActions.addResolution(userInput))
+        /*dispatch(resolutionActions.removeResolution)*/
         handleClick();
         setUserInput({...userInput, title:""});
     }
+
 //add button message
     const [open, setOpen] =useState(false);
     const handleClick = () => {
